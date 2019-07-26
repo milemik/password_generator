@@ -53,7 +53,7 @@ class Password_gen():
     # Write to json file
     def write_to_file(self):
         data = {"time": self.when_time, "password": self.password}
-        with open("PASSWORD.json", "w") as f:
+        with open(f"PASSWORD {self.when_time}.json", "w") as f:
             f.write(json.dumps(data, indent=2))
 
     def __str__(self):
