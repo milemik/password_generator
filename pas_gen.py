@@ -6,14 +6,14 @@ class Password_gen():
 
     def __init__(self):
         # objects
-        self.lower_letters = string.ascii_lower_letters
-        self.upper_letters = string.ascii_upper_letters
-        self.numbers = [x for x in range(0, 10)]
+        self.lower_letters = string.ascii_lowercase
+        self.upper_letters = string.ascii_uppercase
+        self.numbers = [x for x in range(0, 30)]
         self.strong_check = 0
         while True:
             try:
-                self.strong = int(input("How strong would you like your pass to be? (0-10)\n"))
-                if 0 < self.strong < 11:
+                self.strong = int(input("How strong would you like your pass to be? (0-30)\n"))
+                if 0 < self.strong < 31:
                     print("Input ok")
                     break
                 else:
@@ -27,7 +27,8 @@ class Password_gen():
     def random(self):
         while True:
             add = random.choice([self.random_ll, self.random_ul, self.random_num])
-            self.passwrod += add
+            #print(add())
+            self.password += add()
             self.strong_check += 1
             if self.strong_check == self.strong:
                 break
