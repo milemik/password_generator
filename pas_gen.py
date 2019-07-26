@@ -1,5 +1,7 @@
 import random
 import string
+import json
+from datetime import datetime
 
 
 class Password_gen():
@@ -10,6 +12,8 @@ class Password_gen():
         self.upper_letters = string.ascii_uppercase
         self.numbers = [x for x in range(0, 30)]
         self.strong_check = 0
+        td = datetime.now()
+        self.when_time = f"{td.day} {td.month} {td.year}T{td.hour}-{td.minute}-{td.second}"
         while True:
             try:
                 self.strong = int(input("How strong would you like your pass to be? (0-30)\n"))
@@ -46,12 +50,21 @@ class Password_gen():
     def random_num(self):
         return str(random.choice(self.numbers))
 
+    # Write to json file
+    def write_to_file(self):
+        data = {"time": self.when_time, "password": self.password}
+        with open("PASSWORD.json", "w") as f:
+            f.write(json.dumps(data, indent=2))
+
     def __str__(self):
         return f"Your pass is: {self.password}"
+
+
 
 def main():
     s = Password_gen()
     s.random()
+    s.write_to_file()
     print(s)
 
 
