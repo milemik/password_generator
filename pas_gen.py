@@ -8,6 +8,7 @@ class Password_gen():
 
     def __init__(self):
         # objects
+        self.name = input("Name the password:\n")
         self.lower_letters = string.ascii_lowercase
         self.upper_letters = string.ascii_uppercase
         self.numbers = [x for x in range(0, 30)]
@@ -37,11 +38,11 @@ class Password_gen():
             if self.strong_check == self.strong:
                 break
         return self.password
-    
+
     #random lower letter
     def random_ll(self):
         return random.choice(self.lower_letters)
-        
+
     # random UPPER LETTER
     def random_ul(self):
         return random.choice(self.upper_letters)
@@ -52,7 +53,7 @@ class Password_gen():
 
     # Write to json file
     def write_to_file(self):
-        data = {"time": self.when_time, "password": self.password}
+        data = {"name": self.name, "time": self.when_time, "password": self.password}
         with open(f"PASSWORD {self.when_time}.json", "w") as f:
             f.write(json.dumps(data, indent=2))
 
