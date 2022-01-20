@@ -5,6 +5,7 @@ from datetime import datetime
 
 
 class Password_gen():
+    """Create some random password"""
 
     def __init__(self):
         # objects
