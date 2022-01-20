@@ -4,8 +4,8 @@ import json
 from datetime import datetime
 
 
-class Password_gen():
-    """ Create some random password"""
+class Password_gen:
+    """Create some random password"""
 
     def __init__(self):
         # objects
@@ -15,10 +15,14 @@ class Password_gen():
         self.numbers = [x for x in range(0, 30)]
         self.strong_check = 0
         td = datetime.now()
-        self.when_time = f"{td.day} {td.month} {td.year}T{td.hour}-{td.minute}-{td.second}"
+        self.when_time = (
+            f"{td.day} {td.month} {td.year}T{td.hour}-{td.minute}-{td.second}"
+        )
         while True:
             try:
-                self.strong = int(input("How strong would you like your pass to be? (0-30)\n"))
+                self.strong = int(
+                    input("How strong would you like your pass to be? (0-30)\n")
+                )
                 if 0 < self.strong < 31:
                     print("Input ok")
                     break
@@ -28,19 +32,18 @@ class Password_gen():
                 print("Plase enter valid number")
         self.password = ""
 
-
     # GET RANDOM DATA
     def random(self):
         while True:
             add = random.choice([self.random_ll, self.random_ul, self.random_num])
-            #print(add())
+            # print(add())
             self.password += add()
             self.strong_check += 1
             if self.strong_check == self.strong:
                 break
         return self.password
 
-    #random lower letter
+    # random lower letter
     def random_ll(self):
         return random.choice(self.lower_letters)
 
@@ -60,7 +63,6 @@ class Password_gen():
 
     def __str__(self):
         return f"Your pass is: {self.password}"
-
 
 
 def main():
