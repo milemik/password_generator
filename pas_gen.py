@@ -68,10 +68,12 @@ class Password_gen:
 
     # radnom number
     def random_num(self) -> str:
+        """Will return random number as string"""
         return str(random.choice(self.NUMBERS))
 
     # Write to json file
     def write_to_file(self, password: str) -> None:
+        """Will write generate JSON file with password info"""
         when_time: str = time_to_str()
         data = {"name": self.name, "time": when_time, "password": password}
         with open(f"PASSWORD {when_time}.json", "w") as f:
@@ -83,6 +85,7 @@ class Password_gen:
 
 
 def main():
+    """Main function to execute generating password"""
     user_input: int = ask_imput_pass_length()
     pass_name: str = ask_input_pass_name()
     Password_gen(strength=user_input, name=pass_name).run()
