@@ -6,7 +6,7 @@ import logging
 from datetime import datetime
 
 logger = logging.getLogger(__name__)
-logging.basicConfig(filename="pwdgen.log", encoding="utf-8", level=logging.DEBUG)
+logging.basicConfig(level=logging.DEBUG)
 
 
 def mlog(msg: str) -> None:
@@ -15,10 +15,10 @@ def mlog(msg: str) -> None:
 
 def time_to_str() -> str:
     td = datetime.now()
-    return f"{td.day} {td.month} {td.year}T{td.hour}-{td.minute}-{td.second}"
+    return f"{td.day}-{td.month}-{td.year}T{td.hour}-{td.minute}-{td.second}"
 
 
-def ask_imput() -> int:
+def ask_imput_pass_length() -> int:
     while True:
         try:
             strong = int(input("How strong would you like your pass to be? (0-30)\n"))
@@ -31,14 +31,18 @@ def ask_imput() -> int:
             mlog("Plase enter valid number")
 
 
+def ask_input_pass_name() -> str:
+    return input("Name the password:\n")
+
+
 class Password_gen:
     LOVER_LETTERS = string.ascii_lowercase
     UPPER_LETTERS = string.ascii_uppercase
     NUMBERS = [x for x in range(0, 30)]
 
-    def __init__(self, strength: int):
+    def __init__(self, strength: int) -> None:
         # objects
-        self.name: str = input("Name the password:\n")
+        self.name: str = ask_input_pass_name()
         self.when_time: str = time_to_str()
         self.strong: int = strength
 
@@ -79,9 +83,8 @@ class Password_gen:
 
 
 def main():
-    user_input: int = ask_imput()
-    s = Password_gen(strength=user_input)
-    s.run()
+    user_input: int = ask_imput_pass_length()
+    Password_gen(strength=user_input).run()
 
 
 if __name__ == "__main__":
