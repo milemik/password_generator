@@ -40,10 +40,9 @@ class Password_gen:
     UPPER_LETTERS = string.ascii_uppercase
     NUMBERS = [x for x in range(0, 30)]
 
-    def __init__(self, strength: int) -> None:
+    def __init__(self, strength: int, name: str) -> None:
         # objects
-        self.name: str = ask_input_pass_name()
-        self.when_time: str = time_to_str()
+        self.name: str = name
         self.strong: int = strength
 
     # GET RANDOM DATA
@@ -60,31 +59,33 @@ class Password_gen:
         return password
 
     # random lower letter
-    def random_ll(self):
+    def random_ll(self) -> str:
         return random.choice(self.LOVER_LETTERS)
 
     # random UPPER LETTER
-    def random_ul(self):
+    def random_ul(self) -> str:
         return random.choice(self.UPPER_LETTERS)
 
     # radnom number
-    def random_num(self):
+    def random_num(self) -> str:
         return str(random.choice(self.NUMBERS))
 
     # Write to json file
     def write_to_file(self, password: str) -> None:
-        data = {"name": self.name, "time": self.when_time, "password": password}
-        with open(f"PASSWORD {self.when_time}.json", "w") as f:
+        when_time: str = time_to_str()
+        data = {"name": self.name, "time": when_time, "password": password}
+        with open(f"PASSWORD {when_time}.json", "w") as f:
             f.write(json.dumps(data, indent=2))
 
-    def run(self):
+    def run(self) -> None:
         password: str = self.random()
         self.write_to_file(password=password)
 
 
 def main():
     user_input: int = ask_imput_pass_length()
-    Password_gen(strength=user_input).run()
+    pass_name: str = ask_input_pass_name()
+    Password_gen(strength=user_input, name=pass_name).run()
 
 
 if __name__ == "__main__":
